@@ -28,6 +28,7 @@ const App = () => {
       );
     });
     return result;
+    console.log(result);
   };
   const addContact = ({ name, number }) => {
     if (isDublicate(name, number)) {
