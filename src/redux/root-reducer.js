@@ -6,7 +6,7 @@ import contactsReducer from './contacts/contacts-slice';
 import filterReducer from './filter/filter-slice';
 
 const rootReducer = combineReducers({
-  books: contactsReducer,
+  contacts: contactsReducer,
   filter: filterReducer,
 });
 

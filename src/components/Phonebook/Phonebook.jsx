@@ -21,8 +21,6 @@ const Phonebook = () => {
   const filteredContacts = useSelector(getFilteredContacts);
   const filter = useSelector(getFilter);
 
-  console.log(allContacts);
-
   const isDublicate = (name, number) => {
     const normalizedName = name.toLowerCase().trim();
     const normalizedNumber = number.toString().trim();
