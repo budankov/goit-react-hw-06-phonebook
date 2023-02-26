@@ -1,7 +1,15 @@
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { setFilter } from 'redux/filtersSlice';
+
 import styles from './ContactFilter.module.scss';
 
-const ContactFilter = ({ value, changeFilter }) => {
+const ContactFilter = () => {
+  const dispatch = useDispatch();
+
+  const changeFilter = ({ target }) => {
+    dispatch(setFilter(target.value));
+  };
+
   return (
     <label className={styles.filterTitle}>
       Find contacts by name
@@ -9,14 +17,9 @@ const ContactFilter = ({ value, changeFilter }) => {
         className={styles.filterInput}
         onChange={changeFilter}
         type="text"
-        value={value}
+        name="filter"
       ></input>
     </label>
   );
 };
 export default ContactFilter;
-
-ContactFilter.propTypes = {
-  value: PropTypes.string.isRequired,
-  changeFilter: PropTypes.func.isRequired,
-};

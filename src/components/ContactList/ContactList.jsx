@@ -1,33 +1,34 @@
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import PropTypes from 'prop-types';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+import { useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
+
+import { ContactListItem } from 'components/ContactListItem/ContactListItem';
+
 import styles from './ContactList.module.scss';
 
-const ContactList = ({ items, deleteContact }) => {
+const getVisibleContacts = (contacts, filter) => {
+  const normalizedFilter = filter.toLowerCase();
+  return contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter)
+  );
+};
+
+const ContactList = () => {
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+  const visibleContacts = getVisibleContacts(contacts, filter);
+
   return (
     <div className={styles.contactListContaoner}>
       <ul className={styles.contactList}>
-        {items.map(({ id, name, number }) => (
-          <li key={id} className={styles.contactItem}>
-            {name}: {number}
-            <IconButton aria-label="delete" onClick={() => deleteContact(id)}>
-              <DeleteIcon sx={{ fill: '#dd2c00' }} />
-            </IconButton>
-          </li>
-        ))}
+        {contacts.length === 0
+          ? Notify.failure('Contacts list is empty!')
+          : visibleContacts.map(({ id, name, number }) => (
+              <ContactListItem key={id} id={id} name={name} number={number} />
+            ))}
       </ul>
     </div>
   );
 };
 export default ContactList;
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  deleteContact: PropTypes.func.isRequired,
-};
