@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import styles from './Filter.module.scss';
+import styles from './ContactFilter.module.scss';
 
-const Filter = ({ value, changeFilter }) => {
+const ContactFilter = ({ value, changeFilter }) => {
   return (
     <label className={styles.filterTitle}>
       Find contacts by name
@@ -14,9 +14,9 @@ const Filter = ({ value, changeFilter }) => {
     </label>
   );
 };
-export default Filter;
+export default ContactFilter;
 
-Filter.propTypes = {
+ContactFilter.propTypes = {
   value: PropTypes.string.isRequired,
   changeFilter: PropTypes.func.isRequired,
 };
