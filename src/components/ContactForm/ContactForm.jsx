@@ -35,7 +35,7 @@ export const ContactForm = () => {
       validationSchema={userSchema}
       onSubmit={handleSubmit}
     >
-      <Form className={styles.form} onSubmit={handleSubmit}>
+      <Form className={styles.form}>
         <label>
           <p>Name</p>
           <Field type="text" name="name" />
